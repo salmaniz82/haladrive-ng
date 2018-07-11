@@ -1,0 +1,67 @@
+<div class="container top-spacer">
+
+    <div class="row">
+
+        <div class="col s10">
+            <h4 class="pink-text text-lighten-2" lang="{{lang}}">{{gval.vehicles[langIndex()]}}</h4>
+        </div>
+        <div class="col s2">
+            <a class="btn btn pink darken-1 right" ui-sref="app.vehicles()" lang="{{lang}}">{{gval.back[langIndex()]}}</a>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col s6">
+
+
+            <div class="col s12"><h5>Basic Information</h5></div>
+
+            <div class="col s4">ID : </div> <div class="col s8"> {{vm.dataList.id}} </div>
+            <div class="col s4">Vehicle : </div> <div class="col s8"> {{vm.dataList.makerEN + ' ' +vm.dataList.modelEN + ' ' + vm.dataList.year }} </div>
+            <div class="col s4">Body: </div> <div class="col s8"> {{vm.dataList.bodystyleEN }} </div>
+            <div class="col s4">Series: </div> <div class="col s8"> {{vm.dataList.series }} </div>
+            <div class="col s4"> Plate Number: </div> <div class="col s8"> {{vm.dataList.vin }} </div>
+            <div class="col s4"> Price: </div> <div class="col s8"> {{vm.dataList.price }} KD</div>
+            <div class="col s4"> Mileage: <img src="images/icon-mileage@2x.png" alt=""> </div> <div class="col s8"> {{vm.dataList.mileage }} KM</div>
+
+            <div class="col s12"><h5>Ownership</h5></div>
+
+            <div class="col s4"> Owner: </div> <div class="col s8"> {{vm.dataList.owner }} </div>
+            <div class="col s4"> No of Keys: </div> <div class="col s8"> {{vm.dataList.nokeys }} </div>
+            <div class="col s4"> Accident / Damage: </div> <div class="col s8"> {{vm.dataList.accident_damage }}</div>
+
+            <div class="col s12"><h5>Operational Mode</h5></div>
+
+            <div class="col s4"> Transmission: </div> <div class="col s8"> <span lang="{{lang}}"> {{ lang === 'en' ? vm.dataList.transmissionEN : vm.dataList.transmissionAR }} </span></div>
+            <div class="col s4"> Drive Train: </div> <div class="col s8"> <span lang="{{lang}}">{{lang === 'en' ? vm.dataList.driveTrainEN : vm.dataList.driveTrainAR }} </span> </div>
+            <div class="col s4"> Engine: </div> <div class="col s8"> <span lang="{{lang}}"> {{ lang === 'en' ? vm.dataList.engineEN : vm.dataList.engineAR }} </span> </div>
+            <div class="col s4"> Fuel: </div> <div class="col s8"> <span lang="{{lang}}"> {{ lang === 'en' ? vm.dataList.fuelEN : vm.dataList.fuelAR }} </span></div>
+
+            <div class="col 12">
+                <p><h5>Options and Features</h5></p>
+                <ul>
+                    <li ng-repeat="options in vm.dataList.options" lang="{{lang}}"> - {{lang === "en" ? options.titleEN : options.titleAR}} </li>
+                </ul>
+            </div>
+
+
+
+        </div>
+
+        <div class="col s6">
+            <div class="col 12"> <h4>{{vm.dataList.makerEN + ' ' +vm.dataList.modelEN + ' ' + vm.dataList.year }}</h4> </div>
+
+            <img ng-src="{{baseUrl+'/uploads/'+vm.dataList.photo}}">
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+    </div>
+
+
+</div>

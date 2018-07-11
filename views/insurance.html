@@ -1,0 +1,86 @@
+
+<div class="container top-spacer" ng-init="vm.fetchList()">
+
+    <div class="inner" ng-if="vm.editmode == false">
+
+
+
+    <div class="row">
+        <div class="col s6">
+            <h4 class="pink-text text-lighten-2" lang="{{lang}}">{{gval.insurance[langIndex()]}} </h4>
+        </div>
+
+        <div class="col s6">
+            <a class="btn right pink darken-1" ui-sref="app.insadd()" lang="{{lang}}">{{gval.addnew[langIndex()]}}</a>
+        </div>
+
+    </div>
+
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th lang="ar">اسم</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th lang="{{lang}}">{{gval.status[langIndex()]}}</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr ng-repeat="ins in vm.insurance">
+            <td>{{ins.id}}</td>
+            <td>{{ins.nameEN}}</td>
+            <td lang="ar">{{ins.nameAR}}</td>
+            <td>{{ins.email}}</td>
+            <td>{{ins.mobile}}</td>
+            <td>
+                <div class="switch">
+                    <label>
+                        <input type="checkbox" ng-model="ins.status" ng-change="vm.updateStatus(ins.status, ins.id)"
+                               ng-true-value="'1'" ng-false-value="'0'"
+                               ng-checked="ins.status == '1'">
+                        <span class="lever"></span>
+                    </label>
+                </div>
+
+            </td>
+
+            <td>
+
+
+                <a class='dropdown-button btn btn pink darken-1' href='#' data-activates="{{ins.id}}" lang="{{lang}}">{{gval.options[langIndex()]}}<i class="material-icons right">arrow_drop_down</i></a>
+
+                <ul id="{{ins.id}}" class='dropdown-content'>
+
+                    <li><a href="#!" lang="{{lang}}">{{gval.details[langIndex()]}}</a></li>
+                    <li><a ng-click="vm.edit($index)" lang="{{lang}}">{{gval.edit[langIndex()]}}</a></li>
+                    <li><a ng-click="vm.remove($index, ins.id)" lang="{{lang}}">{{gval.remove[langIndex()]}}</a></li>
+
+                </ul>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+
+    </div> <!-- inner -->
+
+    <div class="inner" ng-if="vm.editmode == true">
+
+        
+
+        <div ng-include="'views/insurance-edit.html'"></div>
+
+    </div>
+
+
+
+
+</div>

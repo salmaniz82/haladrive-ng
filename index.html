@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html ng-app="haladrive" ng-controller="appCtrl as vm">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="theme-color" content="D81B60"/>
+	<meta name="description" content="Car Rental Booking Managment System">
+
+
+	<title>Haladrive : Application </title>
+
+	<style type="text/css">
+		.preloader {
+			position: fixed;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			background: #fff;
+			z-index: 99999;
+		}
+
+		.preloader .preloader-gif {
+			display: block;
+			width: 80px;
+			height: 80px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: -40px 0 0 -40px;
+			background: url('images/preloader.gif') no-repeat;
+		}
+	</style>
+
+	<script type="text/javascript">
+		window.addEventListener("load", function(event) {
+    		console.log('load fired in js');
+		});
+
+		window.addEventListener("DOMContentLoaded", function(event) {
+    		console.log('content loaded fired in js');
+		});
+
+
+	</script>
+
+	<link href="assets/css/icon.css" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" id="langStyles" ng-href="assets/css/{{lang}}.css" media="screen,projection"/>
+	<link rel="icon" href="images/01ecfc96.apple-touch-icon-precomposed.png">
+	<link type="text/css" rel="stylesheet" href="assets/css/common.css?ver=2"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="assets/css/angular-notify-material.css"  media="screen,projection"/>
+
+	<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+	<!--
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	-->
+
+	<script src="assets/js/libs/jquery.min.js"></script>
+	<script src="assets/js/libs/jquery.easing.js"></script>
+	<!--
+	<script type="text/javascript" src="assets/js/libs/materialize.js"></script>
+	-->
+
+
+	<!--
+		<script type="text/javascript" src="http://localhost/haladrive-desktop/js/materialize.js"></script>
+	-->
+
+	
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+
+	<script>if (window.module) module = window.module;</script>
+
+
+	<!-- Angular Libraries  -->
+	<script type="text/javascript" src="assets/js/libs/angular.min.js"></script>
+	<script type="text/javascript" src="assets/js/libs/angular-ui-router.min.js"></script>
+	
+
+
+	<!-- Load External Modules  -->
+	<script type="text/javascript" src="app/loadingModule.js"></script>
+	<script type="text/javascript" src="app/angular-notify.js"></script>
+	<!-- Angular APP  -->
+	<script type="text/javascript" src="app/app.js"></script>
+	<script type="text/javascript" src="app/routes.js"></script>
+
+	<!-- Angular Directives  -->
+	<script type="text/javascript" src="app/directives/material-dropdown.js"></script>
+	<script type="text/javascript" src="app/directives/material-select.js"></script>
+	<script type="text/javascript" src="app/directives/static-link.js"></script>
+	<script type="text/javascript" src="app/directives/fileModel.js"></script>
+	<script type="text/javascript" src="app/directives/modal-trigger.js"></script>
+	<script type="text/javascript" src="app/directives/date-picker.js"></script>
+	<script type="text/javascript" src="app/directives/time-picker.js"></script>
+	<script type="text/javascript" src="app/directives/client-email-auto.js"></script>
+	<script type="text/javascript" src="app/directives/side-nav.js"></script>
+
+	<!-- Angular Services  -->
+
+	<script type="text/javascript" src="app/services/logService.js"></script>
+	<script type="text/javascript" src="app/services/auth.js"></script>
+	<script type="text/javascript" src="app/services/langSer.js"></script>
+	<script type="text/javascript" src="app/services/mutipartForm.js"></script>
+
+	<!-- Angualar Factory -->
+
+	<script type="text/javascript" src="app/factory/authInterceptor.js"></script>
+
+	<!-- Filters -->
+	<script type="text/javascript" src="app/filters/filters.js"></script>
+
+	<!-- Angular Controllers -->
+	<script type="text/javascript" src="app/controllers/appCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/authAppCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/loginCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/logoutCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/homeCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/notFoundCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/dashboardCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/vehicleCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/vehicleAddCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/vehicleDetailCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/bookingCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/invoiceCtrl.js"></script>
+
+
+
+	<script type="text/javascript" src="app/controllers/featuresCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/clientsCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/clientsAddCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/clientEditCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/financeCtrl.js"></script>
+
+
+	<script type="text/javascript" src="app/controllers/financeAddCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/financeEditCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/insuranceCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/v-insuranceCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/v-financeCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/maintenanceCtrl.js"></script>
+
+
+	<script type="text/javascript" src="app/controllers/globalCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/gSectionCtrl.js"></script>
+	<script type="text/javascript" src="app/controllers/gBrandCtrl.js"></script>
+
+
+
+</head>
+<body>
+
+<main class="page-wrap">
+
+	<div class="preloader">
+		<span class="preloader-gif"></span>
+	</div>
+
+	<div notifybar style="position:fixed;top:0;right:0; z-index: 9999"></div>
+
+	<div loading-status-message style="position:fixed; top: 50%; left: 50%; margin: -40px 0 0 -40px; display:none;">
+		
+			<img src="images/preloader.gif">
+		
+	</div>
+
+<div ui-view>
+	
+	
+
+</div>
+
+</main>
+
+
+<footer class="page-footer pink darken-1">
+
+    <div class="footer-copyright">
+        <div class="container">
+            <span class="right">&copy; 2017 All Rights Reserved</span>
+            <a class="grey-text text-lighten-4 right" href="http://www.isystematic.com">iSystematic</a>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="assets/js/custom.js"></script>
+
+<script type="text/javascript">
+    window.addEventListener('load', function() {
+    var preloaderElement = document.getElementsByClassName('preloader')[0];
+    preloaderElement.style.display = 'none';
+
+    });
+</script>
+
+</body>
+</html>
+
+</body>
+</html>

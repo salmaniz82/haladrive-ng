@@ -1,0 +1,296 @@
+<div class="container top-spacer" ng-init="vm.fetchGlobal()">
+
+
+  <div class="row">
+    <div class="col s6">
+        <h4 class="pink-text text-lighten-2">New Vehicle:</h4>
+    </div>
+
+    <div class="col s6">
+        <a class="btn right pink darken-1" ui-sref="app.vehicles()"> < Back</a>        
+    </div>
+
+</div>
+
+
+
+    <form name="addnewvehicle">
+
+
+        <div class="row">
+            <div class="col s6 input-field">
+                <input type="file" file-input="photo"/>
+            </div>
+        </div>
+
+	<div class="row">
+
+
+		<div class="col s3 input-field pink-text text-darken-1">
+		  <select name="bodystyle" ng-model="vm.nc.bodystyle" lang="{{lang}}">
+          	<option value="" disabled selected>Select Body Style</option>
+            <option ng-repeat="item in vm.globalList.bodystyle.list" ng-value="item.id" lang="{{lang}}">{{lang === "en" ? item.titleEN : item.titleAR}}</option>
+        </select>
+
+    <label>{{lang === "en" ? vm.globalList.bodystyle.en : vm.globalList.bodystyle.ar}}</label>
+
+		</div>
+		<div class="col s3 input-field">
+			<select id="makers" ng-model="vm.nc.maker" ng-change="vm.udpateModelList()" >
+      		<option value="" disabled selected>Select Maker</option>
+            <option ng-repeat="item in vm.globalList.brand.list" ng-value="item.id"> {{lang === "en" ? item.titleEN : item.titleAR}} </option>
+      	</select>
+            <label>{{lang === "en" ? vm.globalList.brand.en : vm.globalList.brand.ar}}</label>
+		</div>
+
+
+        <div class="col s3 input-field">
+
+            <select name="years" ng-model="vm.nc.model_id" id="selTar" >
+
+                <option value="" disabled selected>Model</option>
+                <option ng-if="vm.nc.maker" ng-repeat="item in vm.globalList.brandlist | filter:{brand_id: vm.nc.maker}" ng-value="item.id"> {{lang === "en" ? item.nameEN : item.nameEN}} </option>
+
+            </select>
+            <label>Select Model</label>
+        </div>
+
+		<div class="col s3 input-field">
+
+			<select name="years" ng-model="vm.nc.year" >
+
+                <option value="" disabled selected>Select Year</option>
+
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+                <option value="2014">2014</option>
+                <option value="2013">2013</option>
+                <option value="2012">2012</option>
+                <option value="2010">2010</option>
+                <option value="2009">2009</option>
+                <option value="2008">2008</option>
+                <option value="2007">2007</option>
+                <option value="2006">2006</option>
+                <option value="2005">2005</option>
+                <option value="2004">2004</option>
+
+
+
+			</select>
+			<label>Select Year</label>
+		</div>
+	</div>
+
+
+        <div class="row">
+
+            <div class="col s3 input-field">
+
+                <select name="trans" ng-model="vm.nc.trans" >
+                    <option disabled selected value="">Select Transmision</option>
+
+                    <option ng-repeat="item in vm.globalList.transmission.list" ng-value="item.id"> {{lang === "en" ? item.titleEN : item.titleAR}} </option>
+
+                </select>
+
+                <label>{{lang === "en" ? vm.globalList.transmission.en : vm.globalList.transmission.ar}}</label>
+            </div>
+
+
+            <div class="col s3 input-field">
+
+                <select name="drivetrain" ng-model="vm.nc.dtrain" >
+                    <option disabled selected value="">Select Drive Train</option>
+                    <option ng-repeat="item in vm.globalList.drivetrain.list" ng-value="item.id"> {{lang === "en" ? item.titleEN : item.titleAR}} </option>
+                </select>
+                <label>{{lang === "en" ? vm.globalList.drivetrain.en : vm.globalList.drivetrain.ar}}</label>
+
+            </div>
+
+
+            <div class="col s3 input-field">
+                <select name="engine" ng-model="vm.nc.engine" >
+                    <option disabled selected value="">Select Engine</option>
+
+                    <option ng-repeat="item in vm.globalList.engine.list" ng-value="item.id"> {{lang === "en" ? item.titleEN : item.titleAR}} </option>
+
+                </select>
+
+                <label>{{lang === "en" ? vm.globalList.engine.en : vm.globalList.engine.ar}}</label>
+            </div>
+
+            <div class="col s3 input-field">
+                <select name="feul" ng-model="vm.nc.fuel" >
+                    <option disabled selected value="">Select Fuel</option>
+                    <option ng-repeat="item in vm.globalList.fuel.list" ng-value="item.id"> {{lang === "en" ? item.titleEN : item.titleAR}} </option>
+                </select>
+                <label>{{lang === "en" ? vm.globalList.fuel.en : vm.globalList.fuel.ar}}</label>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col s12"><p class="form-section-title">
+                <label lang="{{lang}}">{{lang === "en" ? vm.globalList.options.en : vm.globalList.options.ar}}</label></p></div>
+            <div class="col s12">
+                <div class="checkbox-inline" ng-repeat="item in vm.globalList.options.list">
+                    <input type="checkbox" id="{{item.id}}" name="options[]" ng-model="vm.nc.options[item.id]" ng-value="{{item.id}}"/>
+                    <label for="{{item.id}}" lang="{{lang}}">{{lang === "en" ? item.titleEN : item.titleAR}}</label>
+                </div>
+
+            </div>
+        </div>
+
+	<div class="row">
+
+        <div class="col s3 input-field">
+            <input id="last_name" type="text" class="validate" ng-model="vm.nc.series">
+            <label for="last_name">Series</label>
+        </div>
+
+        <div class="col s3 input-field">
+            <input id="last_name" type="text" class="validate" ng-model="vm.nc.vin">
+            <label for="last_name">VIN #</label>
+        </div>
+
+
+        <div class="col s3 input-field">
+            <input id="last_name" type="text" class="validate" ng-model="vm.nc.mileage">
+            <label for="last_name">MILEAGE</label>
+        </div>
+
+
+        <div class="col s3 input-field">
+            <input id="last_name" type="text" class="validate" ng-model="vm.nc.price">
+            <label for="last_name">Price</label>
+        </div>
+
+	</div>
+
+
+  <div class="row">
+    
+    <div class="col s3 input-field">
+      <input type="number" name="owners" ng-model="vm.nc.owner">
+      <label>Owners</label>
+    </div>
+
+    <div class="col s3 input-field">
+      <input type="number" name="keys" ng-model="vm.nc.nokeys">
+      <label>No of Keys</label>
+    </div>
+
+
+    <div class="col s3 input-field">
+      <input type="number" name="accicent-damage" ng-model="vm.nc.acdamage">
+      <label>Accidents / Damage</label>
+    </div>
+  </div>
+
+
+
+
+  <div class="row">
+    <div class="col s12"><p class="form-section-title">Upload Slides</p></div>
+    <div class="row">
+      <div class="col s4">
+          <div class="file-field input-field">
+          <div class="btn pink darken-1">
+            <span>Front</span>
+            <input type="file">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+      </div>
+
+      <div class="col s4">
+          <div class="file-field input-field">
+          <div class="btn pink darken-1">
+            <span>Left</span>
+            <input type="file">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="col s4">
+          <div class="file-field input-field">
+          <div class="btn pink darken-1">
+            <span>Right</span>
+            <input type="file">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    
+    <div class="row">
+      <div class="col s4">
+          <div class="file-field input-field">
+          <div class="btn pink darken-1">
+            <span>Back</span>
+            <input type="file">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+      </div>
+
+      <div class="col s4">
+          <div class="file-field input-field">
+          <div class="btn pink darken-1">
+            <span>Curved Left</span>
+            <input type="file">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+      </div>
+
+      <div class="col s4">
+          <div class="file-field input-field">
+          <div class="btn pink darken-1">
+            <span>Curved Right</span>
+            <input type="file">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+        <p>{{myFile}}</p>
+
+
+    <div class="row">
+        <div class="col m12">
+            <button type="submit" class="btn right pink darken-1" ng-click="vm.checkfile()"> Save </button>
+        </div>
+    </div>
+
+    </form>
+
+</div>
+

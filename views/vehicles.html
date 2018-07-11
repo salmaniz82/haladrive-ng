@@ -1,0 +1,247 @@
+<div class="container top-spacer">
+
+
+<div class="row">
+    <div class="col s6">
+        <h4 class="pink-text text-lighten-2" lang="{{lang}}">{{gval.vehicles[langIndex()]}}</h4>
+    </div>
+
+    <div class="col s6">
+        <a class="btn right pink darken-1" ui-sref="app.vehiclesadd()">Add New</a>        
+    </div>
+
+</div>
+
+    <div ng-if="!vm.records">
+
+            <p>NO Matching Records were found,  please add records</p>
+        
+    </div>
+
+
+    <div class="row">
+
+
+        <div class="input-field col s6">
+            <i class="tiny material-icons prefix tiny">search</i>
+            <input id="searchQuery" type="text" class="validate" ng-model="vm.searchQuery[vm.sortType]" placeholder="Search ... ">
+        </div>
+
+    </div>
+
+    
+
+
+<table class="table highlight" ng-if="vm.records">
+        <thead>
+        <tr>
+            <th>
+
+                <a class="static-link" href="#" ng-click="vm.sortType = '$'">
+                    *
+                </a>
+
+                &nbsp;
+
+                <a class="static-link" href="#" ng-click="vm.sortType = 'id'">
+                    ID
+                </a>
+
+            </th>
+            <th>
+                <a class="static-link" href="#">
+                    Image
+                </a>
+            </th>
+            <th>
+
+
+                <a class="static-link" href="#" ng-click="vm.sortType = 'makerEN'">
+                    Maker
+                </a>
+            </th>
+            <th>
+                <a class="static-link" href="#" ng-click="vm.sortType = 'modelEN'">
+                    Model
+                </a>
+            </th>
+            <th>
+
+                <a class="static-link" href="#" ng-click="vm.sortType = 'series'">
+                    Series
+                </a>
+            </th>
+            <th>
+
+                <a class="static-link" href="#" ng-click="vm.sortType = 'bodystyleEN'">
+                    Type
+                </a>
+            </th>
+            <th>
+
+                <a class="static-link" href="#" ng-click="vm.sortType = 'year'">
+                    Year
+                </a>
+            </th>
+            <th>
+                <a class="static-link" href="#" ng-click="vm.sortType = 'price'">
+                    Price
+                </a>
+            </th>
+            <th>
+
+                <a class="static-link" href="#" ng-click="vm.sortType = 'mileage'">
+                    Mileage
+                </a>
+
+            </th>
+            <th lang="{{lang}}">
+                <a class="static-link" href="#" ng-click="vm.sortType = 'status'">
+                    {{gval.status[langIndex()]}}
+                </a>
+
+            </th>
+
+            <th lang="{{lang}}">
+                <a class="static-link" href="#" ng-click="vm.sortType = 'status'">
+                    {{gval.available[langIndex()]}}
+                </a>
+
+            </th>
+
+
+            <td>&nbsp;</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        
+        <tr ng-repeat="data in vm.dataList | orderBy:vm.sortType | filter: vm.searchQuery">
+
+            <td><a lang="{{lang}}" ui-sref="app.vdetails({id: data.id})">{{data.id}}</a></td>
+            <td><img ng-src="{{baseUrl+'/uploads/'+data.photo}}" style="width: 100px; height: 100px"></td>
+            <td lang="{{lang}}"> {{lang === "en" ? data.makerEN : data.makerAR}} </td>
+            <td lang="{{lang}}"> {{lang === "en" ? data.modelEN : data.modelAR}}  </td>
+            <td>{{data.series}}</td>
+            <td lang="{{lang}}">{{lang === "en" ? data.bodystyleEN : data.bodystyleAR}} </td>
+            <td>{{data.year}}</td>
+            <td>KD {{data.price}}</td>
+            <td>{{data.mileage}} KM</td>
+            <td>
+                <div class="switch">
+                    <label>
+                        <input type="checkbox" ng-model="data.status" ng-change="vm.updateStatus(data.status, data.id)"
+                               ng-true-value="'1'" ng-false-value="'0'"
+                               ng-checked="data.status == '1'">
+                        <span class="lever"></span>
+                    </label>
+                </div>
+            </td>
+
+            <td>
+                <div class="switch">
+                    <label>
+                        <input type="checkbox" ng-model="data.is_available" ng-change="vm.availToggle(data.is_available, data.id)"
+                               ng-true-value="'1'" ng-false-value="'0'"
+                               ng-checked="data.is_available == '1'">
+                        <span class="lever"></span>
+                    </label>
+                </div>
+            </td>
+
+            <td>
+                <a class='dropdown-button btn btn pink darken-1' href='#' data-activates="{{data.id}}" lang="{{lang}}">{{gval.options[langIndex()]}}<i class="material-icons right">arrow_drop_down</i></a>
+
+                <ul id="{{data.id}}" class='dropdown-content'>
+                    <li><a ng-click="vm.edit($index, data.id)" lang="{{lang}}">{{gval.edit[langIndex()]}}</a></li>
+                    <li ng-click="vm.setBookid(data.id)"><a lang="{{lang}}" class="modal-trigger static-link" href="#modal{{data.id}}">Book Vehicle</a></li>
+                    <li><a ng-click="vm.remove($index, data.id)" lang="{{lang}}">{{gval.remove[langIndex()]}}</a></li>
+                    <li><a ui-sref="app.vinsurance({'id': data.id})" lang="{{lang}}">{{gval.insurance[langIndex()]}}</a></li>
+                    <li><a ui-sref="app.maintenance({'id': data.id})" lang="{{lang}}">{{gval.maintenance[langIndex()]}}</a></li>
+                    <li><a ui-sref="app.vfinance({'id': data.id})" lang="{{lang}}">{{gval.finance[langIndex()]}}</a></li>
+                </ul>
+
+                <div id="modal{{data.id}}" class="modal">
+                    <div class="modal-content">
+                        <p class="pink-text text-lighten-2">Add To Bookings</p>
+                        <p>{{data.makerEN}} {{data.modelEN}} {{data.year}}</p>
+
+                        <form ng-submit="vm.createBooking()" name="createBooking" novalidate="true">
+                        <div class="row">
+                                <div class="input-field col s4">
+                                    <i class="material-icons prefix">perm_identity</i>
+                                    <input type="text" id="autocomplete-input" class="client-email-auto" ng-model="vm.ndata.civilno" autocomplete="off">
+                                    <label for="autocomplete-input">Cleint Civil ID</label>
+                                </div>
+
+                                <div class="input-field col s4">
+                                    <input type="text" ng-model="vm.ndata.vehicle_id" class="ng-hide">
+                                </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s2 input-field">
+                                <label>
+                                    Start | Date / Time
+                                </label>
+
+                            </div>
+
+                            <div class="col s4 input-field">
+                                <i class="material-icons prefix">date_range</i>
+                                <input type="text" placeholder="Start Date" class="date-picker" ng-model="vm.ndata.sDate">
+                            </div>
+
+                            <div class="col s4 input-field">
+                                <i class="material-icons prefix">access_time</i>
+                                <input type="text" placeholder="Start Time" class="time-picker" ng-model="vm.ndata.sTime">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s2 input-field">
+                                <label>
+                                    End |  Date / Time
+                                </label>
+
+                            </div>
+
+                            <div class="col s4 input-field">
+                                <i class="material-icons prefix">date_range</i>
+                                <input type="text" placeholder="End Date" class="date-picker" ng-model="vm.ndata.eDate">
+                            </div>
+
+                            <div class="col s4 input-field">
+                                <i class="material-icons prefix">access_time</i>
+                                <input type="text" placeholder="End Time" class="time-picker" ng-model="vm.ndata.eTime">
+                            </div>
+                        </div>
+
+                    
+
+                    <div class="row">
+                        <div class="col s4 input-field">
+                            <button type="submit" class="btn pink darken-1 pull-left">Proceed</button>
+                        </div>
+
+                        <div class="col s4 input-field">
+                                <a class="modal-action modal-close static-link">Cancel</a
+                        </div>
+
+                    </div> <!-- modal contents -->
+
+                    </form>
+
+                </div>
+            </div>
+
+            </td>
+            
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+

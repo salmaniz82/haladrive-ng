@@ -1,0 +1,53 @@
+<div class="container top-spacer">
+
+<div class="row">
+
+    <div class="col s6">
+        <h4 class="pink-text text-lighten-2" lang="{{lang}}">{{gval.addnew[langIndex()]}} : {{gval.finance[langIndex()]}}</h4>
+    </div>
+    <div class="col s6">
+        <a class="btn btn pink darken-1 right" ui-sref="app.finance()" lang="{{lang}}">{{gval.back[langIndex()]}}</a>
+    </div>
+    
+</div>
+
+    <form ng-submit="vm.addNew()">
+
+    <div class="row">
+        <div class="col s6 input-field">
+                <input id="fnNameEN" type="text" class="validate" ng-model="vm.fn.nameEN">
+                <label for="fnNameEN">Finance Name EN</label>
+            </div>
+
+            <div class="col s6 input-field">
+                <input id="fnNameAR" type="text" class="validate" lang="ar" ng-model="vm.fn.nameAR">
+                <label for="fnNameAR">Finance Name AR</label>
+            </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col s6 input-field">
+            <input type="email" ng-model="vm.fn.email" id="email" value="">
+            <label for="email">Email</label>
+        </div>
+
+        <div class="col s6 input-field">
+            <input type="text" ng-model="vm.fn.mobile" id="mobile">
+            <label for="mobile">Mobile</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <button type="submit" class="waves-effect waves-light btn pink darken-1" lang="{{lang}}">{{gval.save[langIndex()]}}</button>
+        </div>
+    </div>
+
+    </form>
+
+</div>
+
+<script>
+    console.log('finace page loaded');
+</script>

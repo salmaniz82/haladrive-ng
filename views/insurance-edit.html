@@ -1,0 +1,48 @@
+
+
+<div class="row">
+    <div class="col s6">
+        <h4 class="pink-text text-lighten-2">Edit: Insurance</h4>
+    </div>
+    <div class="col s6">
+        <a class="btn btn pink darken-1 right" ng-click="vm.editmode = false">Back</a>
+    </div>
+    
+</div>
+
+    <form ng-submit="vm.update()">
+
+    <div class="row">
+        <div class="col s6 input-field">
+                <input id="insrNameEN" type="text" ng-model="vm.insr.nameEN">
+                <label for="insrNameEN" class="active">Name EN</label>
+            </div>
+
+            <div class="col s6 input-field">
+                <input id="insrNameAR" class="validate" type="text" lang="ar" ng-model="vm.insr.nameAR">
+                <label for="insrNameAR" class="active" lang="ar">Name AR</label>
+            </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col s6 input-field">
+            <input type="email" ng-model="vm.insr.email" id="email" value="">
+            <label for="email" class="active">Email</label>
+        </div>
+
+        <div class="col s6 input-field">
+            <input type="text" ng-model="vm.insr.mobile" id="mobile">
+            <label for="mobile" class="active">Mobile</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <button type="submit" class="waves-effect waves-light btn pink darken-1">Update</button>
+        </div>
+    </div>
+
+    </form>
+
+

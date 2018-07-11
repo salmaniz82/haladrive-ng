@@ -1,0 +1,239 @@
+<div class="container top-spacer">
+
+<div class="row">
+
+    <div class="col s6">
+        <h4 class="pink-text text-lighten-2" lang="{{lang}}">{{ gval.vehicles[langIndex()] + ' ' +gval.insurance[langIndex()] }}</h4>
+    </div>
+    <div class="col s6">
+        <a class="btn btn pink darken-1 right" ui-sref="app.insurance()" lang="{{lang}}">{{gval.back[langIndex()]}}</a>
+    </div>
+
+    <div class="col s6">&nbsp;</div>
+
+    <div class="col s6">
+            <a href="#" class="btn btn pink darken-1 right static-link" ng-click="vm.editmode = 'newstuff'" lang="{{lang}}">{{gval.addnew[langIndex()]}}</a>
+    </div>
+    
+</div>
+
+    
+
+    <div class="row">
+        <div class="col s6">
+
+            <p>Vehicle Info : {{vm.dataList.v.makerEN + ' ' + vm.dataList.v.modelEN + ' ' + vm.dataList.v.year}}</p>
+            <p>Body : {{vm.dataList.v.bodystyleEN}}</p>
+            <p>Series : {{vm.dataList.v.series}}</p>
+            <p>Plate No : {{vm.dataList.v.vin}}</p>
+            <p>Mileage : {{vm.dataList.v.mileage}}</p>
+            <p>Price : {{vm.dataList.v.price}}</p>
+
+        </div>
+
+        <div class="col s6">
+            <p><img ng-src="{{baseUrl}}/uploads/{{vm.dataList.v.photo}}" alt=""></p>
+        </div>
+    </div>
+
+
+
+    <form ng-submit="vm.addNew()" ng-if="vm.editmode == 'newstuff'">
+
+
+    <div class="row">
+        
+        <div class="col s4 input-field pink-text text-darken-1">
+            <select name="insCompany" lang="{{lang}}" ng-model="vm.nvins.ins_id">
+                <option value="" disabled selected>Select Insurance</option>
+                <option ng-repeat="item in vm.globalList" ng-value="item.id" lang="{{lang}}">{{lang === "en" ? item.nameEN : item.nameAR}}</option>
+            </select>
+            <label>Insured With</label>
+        </div>
+
+        <div class="col s4 input-field">
+            <select ng-model="vm.nvins.nationality">
+                <option value="" disabled selected>Select Country</option>
+                <option value="kuwait">Kuwait</option>
+                <option value="Saudia Arabia">Saudia Arabia</option>
+                <option value="UAE">UAE</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="Oman">Oman</option>
+            </select>
+            <label>Nationality</label>
+        </div>
+
+            <div class="col s4 input-field">
+                <input id="insNameEN" type="text" class="validate" ng-model="vm.nvins.insuredName">
+                <label for="insNameEN">Name EN</label>
+            </div>
+
+
+    </div>
+
+        <div class="row">
+
+            <div class="col s6 input-field">
+                <input id="policyType" type="text" class="validate" ng-model="vm.nvins.licensepurpose">
+                <label for="policyType">Policy Type</label>
+            </div>
+            <div class="col s6 input-field">
+                <input id="policyNo" type="text" class="validate" ng-model="vm.nvins.policyNo">
+                <label for="policyNo">Policy No</label>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">date_range</i>
+                <label for="registration-date">Registration Date</label>
+                <input type="text"class="date-picker" ng-model="vm.nvins.registration" id="registration-date">
+            </div>
+
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">date_range</i>
+                <label for="expiration-date">Expiration Date</label>
+                <input type="text" class="date-picker" ng-model="vm.nvins.expiration" id="expiration-date">
+            </div>
+        </div>
+
+
+    <div class="row">
+        <div class="col s6">
+            <button type="submit" class="waves-effect waves-light btn pink darken-1" lang="{{lang}}">{{gval.save[langIndex()]}}</button>
+        </div>
+
+        <div class="col s6">
+            <button class="waves-effect waves-light btn red darken-1" lang="{{lang}}" ng-click="vm.cancelMode()">{{gval.cancel[langIndex()]}}</button>
+        </div>
+    </div>
+
+    </form>
+
+    <form ng-submit="vm.update()" ng-if="vm.editmode == 'showedit'">
+
+        <div class="row">
+
+
+
+            <div class="col s4 input-field pink-text text-darken-1">
+                <select name="insCompany" lang="{{lang}}" ng-model="vm.vinsr.ins_id">
+                    <option value="" disabled selected>Select Insurance</option>
+                    <option ng-repeat="item in vm.globalList" ng-value="item.id" lang="{{lang}}" ng-selected="{{item.id == vm.vinsr.ins_id}}">{{lang === "en" ? item.nameEN : item.nameAR}}</option>
+                </select>
+                <label>Insured With</label>
+            </div>
+
+            <div class="col s4 input-field">
+                <select ng-model="vm.vinsr.nationality">
+                    <option value="" disabled selected>Select Country</option>
+                    <option value="kuwait" ng-selected="{{vm.vinsr.nationality == 'kuwait'}}">Kuwait</option>
+                    <option value="Saudia Arabia" ng-selected="{{vm.vinsr.nationality == 'Saudia Arabia'}}">Saudia Arabia</option>
+                    <option value="UAE" ng-selected="{{vm.vinsr.nationality == 'UAE'}}">UAE</option>
+                    <option value="Pakistan" ng-selected="{{vm.vinsr.nationality == 'Pakistan'}}">Pakistan</option>
+                    <option value="Oman" ng-selected="{{vm.vinsr.nationality == 'Oman'}}">Oman</option>
+                </select>
+                <label>Nationality</label>
+            </div>
+
+            <div class="col s4 input-field">
+                <input id="insNameEN" type="text" class="validate" ng-model="vm.vinsr.insuredName">
+                <label for="insNameEN" class="active">Name EN</label>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col s6 input-field">
+                <input id="policyType" type="text" class="validate" ng-model="vm.vinsr.licensepurpose">
+                <label for="policyType" class="active">Policy Type</label>
+            </div>
+            <div class="col s6 input-field">
+                <input id="policyNo" type="text" class="validate" ng-model="vm.vinsr.policyno">
+                <label for="policyNo" class="active">Policy No</label>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">date_range</i>
+                <label for="registration-date" class="active">Registration Date</label>
+                <input type="text"class="date-picker" ng-model="vm.vinsr.registration" id="registration-date">
+            </div>
+
+            <div class="col s6 input-field">
+                <i class="material-icons prefix">date_range</i>
+                <label for="expiration-date" class="active">Expiration Date</label>
+                <input type="text" class="date-picker" ng-model="vm.vinsr.expiration" id="expiration-date">
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col s6">
+                <button type="submit" class="waves-effect waves-light btn pink darken-1" lang="{{lang}}">{{gval.save[langIndex()]}}</button>
+            </div>
+
+            <div class="col s6">
+                <button class="waves-effect waves-light btn red darken-1" lang="{{lang}}" ng-click="vm.cancelMode()">{{gval.cancel[langIndex()]}}</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="row" ng-if="vm.editmode == 'showall'">
+        <div class="s12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Insured With</th>
+                    <th>Policy No</th>
+                    <th>Insured Name</th>
+
+                    <th>Registered at</th>
+                    <th>Expire at</th>
+                    <th>Renewal</th>
+                    <th>Status</th>
+                    <td>&nbsp;</td>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                <tr ng-repeat="data in vm.dataList.vi">
+                    <td>{{data.id}}</td>
+                    <td>{{data.insuredVia}}</td>
+                    <td>{{data.policyno}}</td>
+                    <td>{{data.insuredName}}</td>
+
+                    <td>{{data.registration}}</td>
+                    <td>{{data.expiration}}</td>
+                    <td>{{data.DaysToEx > 0 ? data.DaysToEx : 'N/A' }} <span ng-if="data.DaysToEx > 1"> Days </span> <span ng-if="data.DaysToEx == 1"> Day </span> </td>
+                    <td><span class="status-label" ng-class="{'cancelled': data.status == 'Expired' , 'completed': data.status == 'Active'}">{{data.status}} </span></td>
+
+                    <td>
+                        <a class='dropdown-button btn btn pink darken-1' href='#' data-activates="{{data.id}}" lang="{{lang}}">{{gval.options[langIndex()]}}<i class="material-icons right">arrow_drop_down</i></a>
+                        <ul id="{{data.id}}" class='dropdown-content'>
+                            <li><a ng-click="vm.edit($index, data.id)">Edit</a></li>
+                            <li><a ng-click="vm.remove($index, data.id)" lang="{{lang}}">{{gval.remove[langIndex()]}}</a></li>
+                        </ul>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <p ng-if="vm.editmode == null">No insurance added for this vehicle yet</p>
+
+
+</div>

@@ -1,0 +1,119 @@
+<div class="container top-spacer">
+
+
+    <div class="row">
+
+    <div class="col s6">
+        <h4 class="pink-text text-lighten-2" lang="{{lang}}">{{gval.features[langIndex()]}}</h4>
+    </div>
+
+
+    </div>
+
+
+
+
+<div class="row">
+
+<!-- add new form -->
+    <form ng-submit="vm.addFeature()" ng-if="vm.editmode == false">
+        <div class="input-field col s5">
+          <input id="featureEN" type="text" class="validate" ng-model="vm.frio.en">
+          <label for="featureEN" class="pink-text text-darken-1">Feature EN</label>
+        </div>
+
+        <div class="input-field col s5">
+          <input id="featureAR" type="text" class="validate" lang="ar" ng-model="vm.frio.ar">
+          <label for="featureAR" class="pink-text text-darken-1">Feature AR</label>
+        </div>
+
+        <div class="input-field col s2">
+          <button stype="submit" class="waves-effect waves-light btn right btn pink darken-1" lang="{{lang}}">{{gval.addnew[langIndex()]}}</button>
+        </div>
+    </form>
+
+<!-- edit form -->
+    <form ng-submit="vm.update()" ng-if="vm.editmode == true">
+        <div class="input-field col s5">
+            <input id="featureEN" type="text" class="validate active" ng-model="vm.fED.featureEN">
+            <label for="featureEN" class="pink-text text-darken-1 active">Feature EN</label>
+        </div>
+
+        <div class="input-field col s5">
+            <input id="featureAR" type="text" class="validate active" lang="ar" ng-model="vm.fED.featureAR">
+            <label for="featureAR" class="pink-text text-darken-1 active">Feature AR</label>
+        </div>
+
+        <div class="input-field col s2">
+            <button stype="submit" class="waves-effect waves-light btn right btn pink darken-1" lang="{{lang}}">{{gval.update[langIndex()]}}</button>
+        </div>
+    </form>
+
+
+
+
+</div>
+
+</div>
+
+
+<div class="container">
+
+    <div class="row">
+
+
+        <div class="input-field col s6">
+            <i class="tiny material-icons prefix tiny">search</i>
+            <input id="searchQuery" type="text" class="validate" ng-model="vm.searchQuery" placeholder="Search ... ">
+        </div>
+
+    </div>
+
+<table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Feature</th>
+                    <th lang="ar">الميزات</th>
+                    <th lang="{{lang}}">{{gval.status[langIndex()]}}</th>
+                    <th>&nbsp;</th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="fr in vm.features | orderBy:'-id' | filter: vm.searchQuery">
+
+                    <td>{{fr.id}}</td>
+                    <td>{{fr.featureEN}} </td>
+                    <td class="lang-ar" dir="rtl" lang="ar">{{fr.featureAR}}</td>
+                    <td>
+                        <div class="switch">
+                            <label>                             
+                              <input type="checkbox" checked ng-change="vm.updateFeature(fr.status, fr.id)" ng-model="fr.status"
+                                     ng-true-value="'1'" ng-false-value="'0'"
+                                     ng-checked="fr.status == '1'"
+                              >
+                              <span class="lever"></span>
+                            </label>
+                          </div>
+                    </td>
+                    <td>
+
+                        <a class='dropdown-button btn waves-effect waves-light pink darken-1' href='#' data-activates="{{fr.id}}" lang="{{lang}}">{{gval.options[langIndex()]}}<i class="material-icons right">arrow_drop_down</i></a>
+                                  <!-- Dropdown Structure -->
+                                 <ul class='dropdown-content' id="{{fr.id}}">
+                                    
+                                    <li ng-if="vm.editmode == false"><a href="#!" class="static-link" ng-click="vm.edit('id', fr.id)" lang="{{lang}}">{{gval.edit[langIndex()]}}</a></li>
+                                    <li><a ng-click="vm.removeFeature(fr.id)" lang="{{lang}}">{{gval.remove[langIndex()]}}</a></li>
+
+                                    
+                                </ul>
+                        
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            </div>

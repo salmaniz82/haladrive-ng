@@ -1,0 +1,109 @@
+<div class="container top-spacer">
+
+    <div class="row">
+        <div class="col s6">
+            <h4 class="pink-text text-lighten-2" lang="{{lang}}">{{gval.brand[langIndex()]}} : {{vm.dataList['brand'][0].titleEN}} </h4>
+        </div>
+
+        <div class="col s6" ng-show="vm.mode == 'list'">
+            <a class="btn right pink darken-1" lang="{{lang}}" ng-click="vm.mode = 'new'">{{gval.addnew[langIndex()]}}</a>
+        </div>
+    </div>
+
+    <div ng-if="!vm.records">
+        <p>NO models were found,  please new model ...</p>
+    </div>
+
+
+            <form ng-submit="vm.addNew()" ng-if="vm.mode == 'new'">
+                <div class="row">
+                    <div class="col s4 input-field">
+                        <input id="titleEN" type="text" class="validate" ng-model="vm.ndata.titleEN">
+                        <label for="titleEN">Title EN</label>
+                    </div>
+
+                    <div class="col s4 input-field">
+                        <input id="titleEN" type="text" class="validate" lang="ar" ng-model="vm.ndata.titleAR">
+                        <label for="titleEN">Title AR</label>
+                    </div>
+
+                    <div class="col s2 input-field">
+                        <button type="submit" class="waves-effect waves-light btn right btn pink darken-1 ng-binding" lang="{{lang}}">{{gval.save[langIndex()]}}</button>
+                    </div>
+                </div>
+            </form>
+
+            <form ng-submit="vm.update()" ng-if="vm.mode == 'edit'">
+
+                <div class="row">
+                    <div class="col s4 input-field">
+                        <input id="titleEN" type="text" class="validate" ng-model="vm.rdata.nameEN">
+                        <label for="titleEN" class="active">Title EN</label>
+                    </div>
+
+                    <div class="col s4 input-field">
+                        <input id="titleEN" type="text" class="validate" lang="ar" ng-model="vm.rdata.nameAR">
+                        <label for="titleEN" class="active">Title AR</label>
+                    </div>
+
+                    <div class="col s2 input-field">
+                        <button type="submit" class="waves-effect waves-light btn right btn pink darken-1 ng-binding" lang="{{lang}}">{{gval.update[langIndex()]}}</button>
+                    </div>
+                </div>
+
+            </form>
+
+
+            <table class="table" ng-if="vm.records">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NameEN</th>
+                    <th lang="ar">NameAR</th>
+                    <th>Status</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                <tr ng-repeat="data in vm.dataList['list']">
+                    <td>{{data.id}}</td>
+                    <td>{{data.nameEN}}</td>
+
+                    <td lang="ar">{{data.nameAR}} </td>
+                    <td>
+                        <div class="switch">
+                            <label>
+                                <input type="checkbox" ng-model="data.status" ng-change="vm.updateStatus(data.status, data.id)"
+                                       ng-true-value="'1'" ng-false-value="'0'"
+                                       ng-checked="data.status == '1'">
+                                <span class="lever"></span>
+                            </label>
+                        </div>
+                    </td>
+
+
+                    <td>
+                        <a class='dropdown-button btn btn pink darken-1' href='#' data-activates="{{data.id}}" lang="{{lang}}">{{gval.options[langIndex()]}}<i class="material-icons right">arrow_drop_down</i></a>
+
+                        <ul id="{{data.id}}" class='dropdown-content'>
+
+
+                            <li><a ng-click="vm.edit($index, data.id)" lang="{{lang}}">{{gval.edit[langIndex()]}}</a></li>
+                            <li><a ng-click="vm.remove($index, data.id)" lang="{{lang}}">{{gval.remove[langIndex()]}}</a></li>
+
+                        </ul>
+                    </td>
+
+
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    
+
+
+

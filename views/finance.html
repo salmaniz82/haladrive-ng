@@ -1,0 +1,74 @@
+
+<div class="container top-spacer">
+
+<div class="row">
+    <div class="col s6">
+        <h4 class="pink-text text-lighten-2" lang="{{lang}}">{{gval.finance[langIndex()]}}</h4>
+    </div>
+
+    <div class="col s6">
+        <a class="btn right pink darken-1" ui-sref="app.finadd()" lang="{{lang}}">{{gval.addnew[langIndex()]}}</a>
+    </div>
+
+</div>
+
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th lang="ar">اسم</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th lang="{{lang}}">{{gval.status[langIndex()]}}</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr ng-repeat="fn in vm.finance">
+            <td>{{fn.id}}</td>
+            <td>{{fn.nameEN}}</td>
+            <td lang="ar">{{fn.nameAR}}</td>
+            <td>{{fn.email}}</td>
+            <td>{{fn.mobile}}</td>
+            <td>
+                <div class="switch">
+                    <label>
+                        <input type="checkbox" ng-model="fn.status" ng-change="vm.updateStatus(fn.status, fn.id)"
+                               ng-true-value="'1'" ng-false-value="'0'"
+                               ng-checked="fn.status == '1'">
+                        <span class="lever"></span>
+                    </label>
+                </div>
+
+            </td>
+
+            <td>
+
+
+                <a class='dropdown-button btn btn pink darken-1' href='#' data-activates="{{fn.id}}" lang="{{lang}}">{{gval.options[langIndex()]}}<i class="material-icons right">arrow_drop_down</i></a>
+
+                <ul id="{{fn.id}}" class='dropdown-content'>
+
+                    <li><a href="#!" lang="{{lang}}">{{gval.details[langIndex()]}}</a></li>
+                    <li><a ui-sref="app.finedit({id: fn.id})" lang="{{lang}}">{{gval.edit[langIndex()]}}</a></li>
+                    <li><a ng-click="vm.remove($index, fn.id)" lang="{{lang}}">{{gval.remove[langIndex()]}}</a></li>
+
+                </ul>
+
+            </td>
+
+
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+            </div>
+
+

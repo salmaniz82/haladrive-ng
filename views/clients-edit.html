@@ -1,0 +1,67 @@
+<div class="container top-spacer">
+
+<div class="row">
+
+    <div class="col s6">
+        <h4 class="pink-text text-lighten-2" lang="{{lang}}">  {{gval.edit[langIndex()]}} : {{gval.clients[langIndex()]}} </h4>
+    </div>
+    <div class="col s6">
+        <a class="btn btn pink darken-1 right" ui-sref="app.clients()" lang="{{lang}}">{{gval.back[langIndex()]}}</a>
+    </div>
+    
+</div>
+
+    <form ng-submit="vm.updateClients()">
+
+    <div class="row">
+        <div class="col s6 input-field">
+                <input id="cliNameEN" type="text" ng-model="vm.clir.nameEN">
+                <label for="cliNameEN" class="active">Client Name EN</label>
+            </div>
+
+            <div class="col s6 input-field">
+                <input id="cliNameAR" class="validate" type="text" lang="ar" ng-model="vm.clir.nameAR">
+                <label for="cliNameAR" class="active" lang="ar">Client Name AR</label>
+            </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col s6 input-field">
+            <input type="text" ng-model="vm.clir.civilno" id="civilno" value="">
+            <label for="civilno" class="active">Email</label>
+        </div>
+
+        <div class="col s6 input-field">
+            <input type="email" ng-model="vm.clir.email" id="email" value="">
+            <label for="email" class="active">Email</label>
+        </div>
+
+    </div>
+
+
+        <div class="row">
+
+            <div class="col s6 input-field">
+                <input type="text" ng-model="vm.clir.mobile" id="mobile">
+                <label for="mobile" class="active">Mobile</label>
+            </div>
+
+            <div class="col s6 input-field">
+                <input type="text" ng-model="vm.clir.mobile2" id="mobile2">
+                <label for="mobile2" class="active">Other Contact</label>
+            </div>
+
+
+        </div>
+
+    <div class="row">
+        <div class="col s12">
+            <button type="submit" class="waves-effect waves-light btn pink darken-1" lang="ar">{{gval.update[langIndex()]}}</button>
+        </div>
+    </div>
+
+    </form>
+
+</div>

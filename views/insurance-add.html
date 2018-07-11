@@ -1,0 +1,49 @@
+<div class="container top-spacer">
+
+<div class="row">
+
+    <div class="col s6">
+        <h4 class="pink-text text-lighten-2" lang="{{lang}}">{{gval.addnew[langIndex()]}} : {{gval.insurance[langIndex()]}}</h4>
+    </div>
+    <div class="col s6">
+        <a class="btn btn pink darken-1 right" ui-sref="app.insurance()" lang="{{lang}}">{{gval.back[langIndex()]}}</a>
+    </div>
+    
+</div>
+
+    <form ng-submit="vm.addNew()">
+
+    <div class="row">
+        <div class="col s6 input-field">
+                <input id="insNameEN" type="text" class="validate" ng-model="vm.nins.nameEN">
+                <label for="insNameEN">Name EN</label>
+            </div>
+
+            <div class="col s6 input-field">
+                <input id="insNameAR" type="text" class="validate" lang="ar" ng-model="vm.nins.nameAR">
+                <label for="insNameAR">Name AR</label>
+            </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col s6 input-field">
+            <input type="email" ng-model="vm.nins.email" id="email" value="">
+            <label for="email">Email</label>
+        </div>
+
+        <div class="col s6 input-field">
+            <input type="text" ng-model="vm.nins.mobile" id="mobile">
+            <label for="mobile">Mobile</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <button type="submit" class="waves-effect waves-light btn pink darken-1" lang="{{lang}}">{{gval.save[langIndex()]}}</button>
+        </div>
+    </div>
+
+    </form>
+
+</div>

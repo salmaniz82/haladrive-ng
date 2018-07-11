@@ -1,0 +1,68 @@
+
+<div class="container top-spacer">
+
+<div class="row">
+
+    <div class="col s6">
+        <h4 class="pink-text text-lighten-2" lang="{{lang}}">{{gval.invoices[langIndex()]}}</h4>
+    </div>
+    <div class="col s6">
+        
+    </div>
+    
+</div>
+
+<table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Dated</th>
+                    <th>Cleint</th>
+                    <th>Vehicle</th>
+                    <th>Mileage</th>
+                    <th>Duration</th>
+                    <th>Rate @ Hr</th>
+                    <th>Amount</th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+
+                
+                <tr ng-repeat="data in vm.dataList">
+                    <td>{{data.id}}/{{data.booking_id}}</td>
+                    <td><small>{{data.created_at}}</small></td>
+                    <td><a href="#?id33">{{data.nameEN}}</a></td>
+                    <td><a ui-sref="app.vdetails({id: data.vehicle_id})">{{data.makerEN +' '+ data.modelEN }}</a>
+                        <br>
+                        <small>({{data.year + ': Plate# ' +data.vin}})</small></td>
+                    <td>{{data.mileage}} KM</td>
+                    <td>{{data.HRS}} hrs.</td>
+                    <td>{{data.perDay}}</td>
+                    <td>{{data.Amount}} KD</td>
+                    
+                    
+                    
+
+                    <td>
+                        <a class='dropdown-button btn btn pink darken-1' href='#' data-activates="{{data.id}}" lang="{{lang}}">{{gval.options[langIndex()]}}<i class="material-icons right">arrow_drop_down</i></a>
+
+                        <ul id="{{data.id}}" class='dropdown-content'>
+                            <li><a ng-click="vm.remove($index, data.id)" lang="{{lang}}">{{gval.remove[langIndex()]}}</a></li>
+                        </ul>
+                    </td>
+                    
+
+                </tr>
+
+                
+                
+
+                
+                
+                </tbody>
+            </table>
+
+
+
+            </div>
