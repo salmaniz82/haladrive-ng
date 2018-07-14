@@ -202,19 +202,61 @@
             .state('app.global', {
                 url : '/global',
                 templateUrl: 'views/global.html',
-                controller: 'globalCtrl as vm'
+                controller: 'globalCtrl as vm',
+                authorize : true,
+                resolve : {
+                    security: ['$q','auth', function($q, auth){
+                    if(auth.getUser().role_id != 1){
+                    return $q.reject("Not Authorized");
+                    }
+                    }]
+                }
+
             })
 
             .state('app.gsection', {
-                url : '/:section',
+                url : '/global/:section',
                 templateUrl: 'views/global-section.html',
-                controller: 'gSectionCtrl as vm'
+                controller: 'gSectionCtrl as vm',
+                authorize : true,
+                resolve : {
+                    security: ['$q','auth', function($q, auth){
+                    if(auth.getUser().role_id != 1){
+                    return $q.reject("Not Authorized");
+                    }
+                    }]
+                }
             })
 
             .state('app.brand', {
                 url : '/brand/:id',
                 templateUrl: 'views/global-brand.html',
-                controller: 'gBrandCtrl as vm'
+                controller: 'gBrandCtrl as vm',
+                authorize : true,
+                resolve : {
+                    security: ['$q','auth', function($q, auth){
+                    if(auth.getUser().role_id != 1){
+                    return $q.reject("Not Authorized");
+                    }
+                    }]
+                }
+            })
+
+            .state('app.test', {
+
+                url : '/otest',
+                templateUrl: 'views/otest.html',
+                controller: 'otestCtrl as vm',
+                authorize : true,
+                resolve : {
+                    security: ['$q','auth', function($q, auth){
+                    if(auth.getUser().role_id != 1){
+                    return $q.reject("Not Authorized");
+                    }
+                    }]
+                }
+
+
             })
 
         .state('notfound', {

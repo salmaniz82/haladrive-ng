@@ -28,23 +28,32 @@ $(document).on('click', "a[href='#modal1']", function(e) {
     */
 
 
-angular.module('haladrive').run(['$rootScope', function ($rootScope) {
+angular.module('haladrive').run(['$rootScope','$state', function ($rootScope, $state) {
 
     $rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams, options) {
-
-        console.log('$stateChangeStart');
-
-        console.log(fromState.name);
-        console.log(toState.name);
 
     });
 
 
     $rootScope.$on('$stateChangeSuccess', function(e, toState, toParams, fromState, fromParams) {
 
-        console.log('$stateChangeSuccess');
+        
+    });
+
+    $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
+       
+      console.log('error cauught');
+      e.preventDefault();
+      $state.go('app.dashboard');
 
     });
+
+
+    
+
+
+
+
 
 }]);
 
