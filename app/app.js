@@ -1,8 +1,12 @@
 (function(){
 	
+    function apiUrl()
+    {
+      return (location.hostname == 'haladrive.com') ? 'https://api.haladrive.com' : 'http://api.haladrive.local';
+    }
+
     angular.module('haladrive', ['ui.router', 'loadingStatus', 'angularNotify'])
-       .constant("API_URL", "http://api.haladrive.local");
-   //   .constant("API_URL", "https://api.haladrive.com");
+       .constant("API_URL", apiUrl());
 })();
 
 
