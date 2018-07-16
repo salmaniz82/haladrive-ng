@@ -26,8 +26,9 @@
 	<div class="row">
 
 
-		<div class="col s3 input-field pink-text text-darken-1">
+		<div class="col s3 input-field text-darken-1">
 		  <select name="bodystyle" ng-model="vm.nc.bodystyle" lang="{{lang}}">
+        
           	<option value="" disabled selected>Select Body Style</option>
             <option ng-repeat="item in vm.globalList.bodystyle.list" ng-value="item.id" lang="{{lang}}">{{lang === "en" ? item.titleEN : item.titleAR}}</option>
         </select>
@@ -189,99 +190,6 @@
       <label>Accidents / Damage</label>
     </div>
   </div>
-
-
-
-
-  <div class="row">
-    <div class="col s12"><p class="form-section-title">Upload Slides</p></div>
-    <div class="row">
-      <div class="col s4">
-          <div class="file-field input-field">
-          <div class="btn pink darken-1">
-            <span>Front</span>
-            <input type="file">
-          </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-          </div>
-        </div>
-      </div>
-
-      <div class="col s4">
-          <div class="file-field input-field">
-          <div class="btn pink darken-1">
-            <span>Left</span>
-            <input type="file">
-          </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-          </div>
-        </div>
-      </div>
-
-
-
-      <div class="col s4">
-          <div class="file-field input-field">
-          <div class="btn pink darken-1">
-            <span>Right</span>
-            <input type="file">
-          </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-          </div>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-
-
-
-  <div class="row">
-    
-    <div class="row">
-      <div class="col s4">
-          <div class="file-field input-field">
-          <div class="btn pink darken-1">
-            <span>Back</span>
-            <input type="file">
-          </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-          </div>
-        </div>
-      </div>
-
-      <div class="col s4">
-          <div class="file-field input-field">
-          <div class="btn pink darken-1">
-            <span>Curved Left</span>
-            <input type="file">
-          </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-          </div>
-        </div>
-      </div>
-
-      <div class="col s4">
-          <div class="file-field input-field">
-          <div class="btn pink darken-1">
-            <span>Curved Right</span>
-            <input type="file">
-          </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-          </div>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-
-        <p>{{myFile}}</p>
 
 
     <div class="row">

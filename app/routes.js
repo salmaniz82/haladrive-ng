@@ -99,6 +99,13 @@
             controller: 'vehicleAddCtrl as vm'
         })
 
+        .state('app.vslide', {
+            
+            url: '/vslides/:id',
+            templateUrl: 'views/vehicle-add-slides.html',
+            controller: 'vehicleAddSlidesCtrl as vm'
+        })
+
 
 
         .state('app.clients', {
@@ -199,18 +206,18 @@
             controller: 'insuranceCtrl as vm'
         })
 
-            .state('app.global', {
-                url : '/global',
-                templateUrl: 'views/global.html',
-                controller: 'globalCtrl as vm',
-                authorize : true,
-                resolve : {
-                    security: ['$q','auth', function($q, auth){
-                    if(auth.getUser().role_id != 1){
-                    return $q.reject("Not Authorized");
-                    }
-                    }]
+        .state('app.global', {
+            url : '/global',
+            templateUrl: 'views/global.html',
+            controller: 'globalCtrl as vm',
+            authorize : true,
+            resolve : {
+            security: ['$q','auth', function($q, auth){
+            if(auth.getUser().role_id != 1){
+                return $q.reject("Not Authorized");
                 }
+                }]
+            }
 
             })
 
