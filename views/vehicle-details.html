@@ -13,7 +13,7 @@
 
     <div class="row">
 
-        <div class="col s6">
+        <div class="col s5">
 
 
             <div class="col s12"><h5>Basic Information</h5></div>
@@ -50,10 +50,20 @@
 
         </div>
 
-        <div class="col s6">
+        <div class="col s7">
             <div class="col 12"> <h4>{{vm.dataList.makerEN + ' ' +vm.dataList.modelEN + ' ' + vm.dataList.year }}</h4> </div>
 
-            <img ng-src="{{baseUrl+'/uploads/'+vm.dataList.photo}}">
+            <!--
+            <img ng-src="{{baseUrl+'/uploads/'+vm.dataList.photo}}" id="slide-preload">
+        -->
+            
+
+            <div class="carousel carousel-slider" hd-carousel-slider>
+                
+                <a class="carousel-item static-link" href="#" ng-repeat="slideImg in vm.dataList.slides">
+                        <img ng-src="{{baseUrl+'/uploads/'+vm.dataList.id+'/'+slideImg.slide_large}}">
+                </a>
+            </div>
 
         </div>
 

@@ -3,47 +3,32 @@
 
     .directive('staticLink', function() {
 
-    	vm = this;
+    vm = this;
 
     return {
-
         restrict : 'C',
         link : function(scope, ele, attr, ngModel){
-
             ele.on('click', function(e) {
-
             e.preventDefault();
-
-            });
-       
-            }
-    
+            });     
+        }
     };
 
 
 })
-
     .directive('dropdownButton', function() {
 
 
         vm = this;
 
     return {
-
         restrict : 'C',
         link : function(scope, ele, attr, ngModel){
-
-            ele.on('click', function(e) {
-
-            e.preventDefault();
-
-            });
-
-            }
-
+        ele.on('click', function(e) {
+        e.preventDefault();
+        });
+        }
     };
-
-
 });
 
 

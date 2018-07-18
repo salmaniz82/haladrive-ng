@@ -174,3 +174,11 @@ rgba(216,27,96,0.16)
   border-radius: 0em;
   background-color: rgba(50,50,50,0.2);
 }
+
+.carousel .indicators .indicator-item.active {
+  background-color: #d81b60 !important;
+}
+
+.carousel .indicators .indicator-item {
+  background-color: rgba(216, 27, 96, 0.2) !important;
+}

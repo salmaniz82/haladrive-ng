@@ -6,7 +6,7 @@
         var vm = this;
 
         vm.vehicleID = $stateParams.id;
-        vm.uploadUrl = API_URL+'/vehicles/uploadslides/'+vm.vehicleID;
+        vm.uploadUrl = API_URL+'/api/vehicles/uploadslides/'+vm.vehicleID;
 
         $scope.dropzoneConfig = {
 		    'options': { 
@@ -15,9 +15,11 @@
 		    'eventHandlers': {
 		      'sending': function (file, xhr, formData) {
 
+              console.log(xhr);
+
 		      },
 		      'success': function (file, response) {
-		        console.log('file is sent');
+		          console.log('file is sent');
 		      }
 		    }
   		};

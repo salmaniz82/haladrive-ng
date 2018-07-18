@@ -1,10 +1,9 @@
 (function() {
 
-    angular.module('haladrive').controller('vehicleAddCtrl', function(API_URL, $http, $scope){
+    angular.module('haladrive').controller('vehicleAddCtrl', function(API_URL, $http, $scope, $state){
 
         var vm = this;
         $scope.globalLoaded = false;
-
 
         vm.fetchGlobal = function()
         {
@@ -57,6 +56,10 @@
                             timeout: 5000 //time in ms
                         };
                         $scope.$emit('notify', notify);
+                        console.log('ready to move');
+
+                        $state.go('app.vslide', {'id': response.data.last_id});
+
                     };
 
 
@@ -69,6 +72,8 @@
                             timeout: 5000 //time in ms
                         };
                         $scope.$emit('notify', notify);
+
+
                     };
 
                     $http.post(uploadUrl, form_data,
@@ -103,6 +108,8 @@
                      timeout: 5000 //time in ms
                  };
                  $scope.$emit('notify', notify);
+
+
              };
 
 
@@ -162,9 +169,6 @@
             setTimeout(function() {
                 myElement.material_select();
             }, 500);
-
-
-
 
             myElement.material_select();
             console.log('destroyed');
