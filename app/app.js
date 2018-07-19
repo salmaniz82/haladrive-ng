@@ -46,9 +46,18 @@ angular.module('haladrive').run(['$rootScope','$state', function ($rootScope, $s
 
     $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
        
-      console.log('error cauught');
+      
+      
+      
+
+      if(error == 'Un Authorized')
+      {
+        $state.go('app.dashboard');
+      }
+
       e.preventDefault();
-      $state.go('app.dashboard');
+
+
 
     });
 

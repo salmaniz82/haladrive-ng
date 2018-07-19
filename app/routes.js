@@ -200,7 +200,6 @@
 
 
         .state('app.insadd', {
-
             url: '/insadd',
             templateUrl: 'views/insurance-add.html',
             controller: 'insuranceCtrl as vm'
