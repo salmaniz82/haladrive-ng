@@ -32,7 +32,7 @@
     
 
 
-<table class="table highlight" ng-if="vm.records">
+<table class="table" ng-if="vm.records">
         <thead>
         <tr>
             <th>
@@ -119,7 +119,7 @@
         <tr ng-repeat="data in vm.dataList | orderBy:vm.sortType | filter: vm.searchQuery">
 
             <td><a lang="{{lang}}" ui-sref="app.vdetails({id: data.id})">{{data.id}}</a></td>
-            <td><img ng-src="{{baseUrl+'/uploads/'+data.photo}}" style="width: 100px; height: 100px"></td>
+            <td><img ng-src="{{baseUrl+'/uploads/'+data.photo}}" style="width: 100px; height: 74.07407407407407px"></td>
             <td lang="{{lang}}"> {{lang === "en" ? data.makerEN : data.makerAR}} </td>
             <td lang="{{lang}}"> {{lang === "en" ? data.modelEN : data.modelAR}}  </td>
             <td>{{data.series}}</td>
