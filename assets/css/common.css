@@ -182,3 +182,32 @@ rgba(216,27,96,0.16)
 .carousel .indicators .indicator-item {
   background-color: rgba(216, 27, 96, 0.2) !important;
 }
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  cursor: pointer;
+  
+}
+
+.upload-btn-wrapper .btnPick {
+  border: 2px solid #daacbd;
+  color: #daacbd;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
