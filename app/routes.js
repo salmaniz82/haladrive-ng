@@ -87,23 +87,31 @@
 
         .state('app.vdetails', {
 
-            url: '/vehicles/:id',
+            url: '/vehicles/detail/:id',
             templateUrl: 'views/vehicle-details.html',
             controller: 'vehicleDetailCtrl as vm'
         })
 
         .state('app.vehiclesadd', {
             
-            url: '/addvehicle',
+            url: '/vehicles/add',
             templateUrl: 'views/vehicle-add.html',
             controller: 'vehicleAddCtrl as vm'
         })
 
         .state('app.vslide', {
             
-            url: '/vslides/:id',
+            url: '/vehicle/vslides/:id',
             templateUrl: 'views/vehicle-add-slides.html',
             controller: 'vehicleAddSlidesCtrl as vm'
+        })
+
+
+        .state('app.vehicleEdit', {
+            
+            url: '/vehicle/edit/:id',
+            templateUrl: 'views/vehicle-edit.html',
+            controller: 'vehicleEditCtrl as vm'
         })
 
 

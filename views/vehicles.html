@@ -153,7 +153,7 @@
                 <a class='dropdown-button btn btn pink darken-1' href='#' data-activates="{{data.id}}" lang="{{lang}}">{{gval.options[langIndex()]}}<i class="material-icons right">arrow_drop_down</i></a>
 
                 <ul id="{{data.id}}" class='dropdown-content'>
-                    <li><a ng-click="vm.edit($index, data.id)" lang="{{lang}}">{{gval.edit[langIndex()]}}</a></li>
+                    <li><a ui-sref="app.vehicleEdit({'id': data.id})" lang="{{lang}}">{{gval.edit[langIndex()]}}</a></li>
                     <li><a lang="{{lang}}" ui-sref="app.vslide({id: data.id})">{{'Slides'}}</a></li>
                     <li ng-click="vm.setBookid(data.id)"><a lang="{{lang}}" class="modal-trigger static-link" href="#modal{{data.id}}">Book Vehicle</a></li>
                     <li><a ng-click="vm.remove($index, data.id)" lang="{{lang}}">{{gval.remove[langIndex()]}}</a></li>

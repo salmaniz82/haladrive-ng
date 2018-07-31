@@ -211,11 +211,8 @@
             };
 
 
-            vm.closeModel = function()
-            {
-
-
-            };
+            vm.optionsList = [111,112,115,116,119,120];
+            
 
 
 
