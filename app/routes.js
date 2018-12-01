@@ -7,6 +7,8 @@
 
     function stateConfig($stateProvider, $urlRouterProvider){
 
+
+
         $urlRouterProvider.otherwise('notfound');
         $stateProvider
         .state('home', {

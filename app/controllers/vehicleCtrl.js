@@ -1,6 +1,6 @@
 (function() {
 
-    angular.module('haladrive').controller('vehicleCtrl', function(API_URL, $http, $scope, $window){
+    angular.module('haladrive').controller('vehicleCtrl', function(API_URL, $http, $scope, $window, $state){
 
         var vm = this;
         vm.records = false;
@@ -10,18 +10,46 @@
 
 
         $scope.mileRange = 10;
-        $scope.priceRange = 10;        
+        $scope.priceRange = 10;    
 
+
+        
 
         $scope.changeHistory = 1;
 
-        vm.queryString = '?all';
+        vm.userLimit = 10;
+
+        vm.limit = vm.userLimit || 10;        
+
+        vm.queryString = '?all&limit='+vm.limit;
         vm.targetUrl = API_URL+'/api/vehicles/b/'+vm.queryString;
 
         $scope.filterHeaderItem = [];
         $scope.appliedFilterItem = [];
 
         $scope.isFetching = false;
+
+
+        $scope.globalLoaded = false;
+
+
+        vm.checkLimit = function(val) 
+        {
+
+            vm.userLimit =  parseInt(val);
+            vm.limit = parseInt(val);
+
+            vm.queryString = '?all&limit='+vm.limit;
+
+            vm.targetUrl = API_URL+'/api/vehicles/b/'+vm.queryString;
+
+            vm.fetch();
+
+            
+        }
+
+
+        
 
         /*
 
@@ -50,10 +78,12 @@
                 {
                     vm.dataList = response.data.v;
                     vm.records = true;
-                    vm.limit = response.data.limit;
+                 //   vm.limit = response.data.limit;
                     vm.records = response.data.records;
                     vm.noPages = response.data.noPages;
                     vm.currentPage = response.data.currentPage;
+
+                    $scope.globalLoaded = true;
 
                     console.log(vm.noPages);    
 
@@ -79,15 +109,12 @@
 
             $scope.isFetching = true;
 
-            
-
             var paginate = '&limit='+parseInt(vm.limit)+'&page='+parseInt(++vm.currentPage);
              
 
             var filterUrl = API_URL+'/api/vehicles/b/'+vm.queryString + '&minprice='+$scope.priceRange+'&minmileage='+$scope.mileRange+paginate;
 
             
-
 
             $http.get(filterUrl).then(
 
@@ -122,19 +149,11 @@
         };
 
 
-
-
-        angular.element($window).bind('scroll', function() {
-
-            /*
-                $window.scrollY
-                window.pageYOffset
-                document.documentElement.offsetHeight
-                console.log('clientHeight' + document.documentElement.clientHeight);
-                console.log('offsetHeight' + document.documentElement.offsetHeight);
-                console.log('scrollHeight' + document.documentElement.scrollHeight);
-            */
-
+        
+          
+        function vehicleInfiniteScroll()
+        {
+            
             function isMobile()
             {
                 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -145,20 +164,9 @@
                     return false;
                 }
             }
-/*
-
-            console.log('clientHeight' + document.documentElement.clientHeight);
-            console.log('offsetHeight' + document.documentElement.offsetHeight);
-            console.log('scrollHeight' + document.documentElement.scrollHeight);
 
 
-            console.log('$window.pageYOffset' + $window.pageYOffset);
-
-            */
-
-            
-
-            var YScrollLimit;
+             var YScrollLimit;
 
             if(!isMobile)
             {
@@ -220,16 +228,20 @@
             }
 
 
-
-        });
-
+            console.log('inside scroll');
 
 
+        }
 
 
+        
 
 
+        angular.element($window).on('scroll', vehicleInfiniteScroll);
 
+    
+
+        
         /*end vehicle loading and fileriring and scroll */
 
 
@@ -407,10 +419,6 @@
 
 
             vm.optionsList = [111,112,115,116,119,120];
-            
-
-
-
 
     });
 

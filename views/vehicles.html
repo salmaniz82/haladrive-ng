@@ -27,11 +27,31 @@
             <input id="searchQuery" type="text" class="validate" ng-model="vm.searchQuery[vm.sortType]" placeholder="Search ... ">
         </div>
 
+        <div class="col s2 input-field">
+
+
+            <select id="makers" ng-model="vm.userLimit" ng-change="vm.checkLimit(vm.userLimit)">
+            <option value="" disabled>Page Limit</option>
+            <option ng-value="10" selected="10">10</option>
+            <option ng-value="20">20</option>
+            <option ng-value="30">30</option>
+            <option ng-value="40">40</option>
+            <option ng-value="50">50</option>
+            
+        </select>
+            <label>Page Size : {{vm.limit}} Total Pages : {{vm.noPages}}</label>
+        </div>
+
+        
+
     </div>
 
     
 
 <div id="page-Indicator" ng-cloak>{{vm.dataList.length}} of {{vm.records}}</div>
+
+
+<p>Query : {{vm.targetUrl}}</p>
 
 
 <table class="table" ng-if="vm.records">
@@ -112,7 +132,9 @@
             </th>
 
 
-            <td>&nbsp;</td>
+            <td>
+              &nbsp;
+            </td>
         </tr>
         </thead>
         <tbody>
