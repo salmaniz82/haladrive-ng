@@ -134,6 +134,22 @@
                 <label>{{lang === "en" ? vm.globalList.fuel.en : vm.globalList.fuel.ar}}</label>
             </div>
 
+            <div class="col s3 input-field">
+                <select name="interior" ng-model="vm.nc.interior" >
+                    <option disabled selected value="">Select Interior</option>
+                    <option ng-repeat="item in vm.globalList.interior.list" ng-value="item.id"> {{lang === "en" ? item.titleEN : item.titleAR}} </option>
+                </select>
+                <label>{{lang === "en" ? vm.globalList.interior.en : vm.globalList.interior.ar}}</label>
+            </div>
+
+            <div class="col s3 input-field">
+                <select name="exterior" ng-model="vm.nc.exterior" >
+                    <option disabled selected value="">Select Exterior</option>
+                    <option ng-repeat="item in vm.globalList.exterior.list" ng-value="item.id"> {{lang === "en" ? item.titleEN : item.titleAR}} </option>
+                </select>
+                <label>{{lang === "en" ? vm.globalList.exterior.en : vm.globalList.exterior.ar}}</label>
+            </div>
+
         </div>
 
 
