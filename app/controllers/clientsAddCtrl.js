@@ -1,6 +1,6 @@
 (function() {
 
-    angular.module('haladrive').controller('clientsAddCtrl', function(API_URL, $http, $state){
+    angular.module('haladrive').controller('clientsAddCtrl', function(API_URL, $http, $state, $scope){
 
         var vm = this;
 
@@ -47,7 +47,7 @@
                 console.log('erlen' + errors.length);
 
                 var url = API_URL+'/api/clients';
-                var data = {nameEN: vm.ncli.nameEN, nameAR: vm.ncli.nameAR, mobile: vm.ncli.mobile, email: vm.ncli.email, civilno: vm.ncli.civilno};
+                var data = {nameEN: vm.ncli.nameEN, nameAR: vm.ncli.nameAR, mobile: vm.ncli.mobile, mobile2: vm.ncli.mobile2, email: vm.ncli.email, civilno: vm.ncli.civilno};
 
                 $http({
                     url: url,
@@ -58,9 +58,40 @@
                     if(response.data.status == true)
                     {
                         vm.ncli = {};
+
+                        var notify = {
+                            type: 'success',
+                            title: 'Success',
+                            content: response.data.message,
+                            timeout: 3000 //time in ms
+                        };
+
+                        $scope.$emit('notify', notify);
+
+
                     }
 
-                });
+                }, 
+
+                function(response)
+                {
+                    console.log('error while adding new data');
+
+                    var notify = {
+                            type: 'error',
+                            title: 'Failed',
+                            content: response.data.message,
+                            timeout: 3000 //time in ms
+                        };
+
+                        $scope.$emit('notify', notify);
+
+
+                }
+
+
+
+                );
             }
             else {
                 console.log('Form validation errors');
