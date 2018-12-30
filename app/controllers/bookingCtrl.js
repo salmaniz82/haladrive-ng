@@ -1,11 +1,14 @@
 (function() {
 
-    angular.module('haladrive').controller('bookingCtrl', function(API_URL, $stateParams, $http, $scope){
+    angular.module('haladrive').controller('bookingCtrl', function(API_URL, $stateParams, $http, $scope, auth){
 
         var vm = this;
 
         vm.mode = 'list';
         vm.records = false;
+
+
+        console.log(auth.getUser());
 
 
         vm.findIndex = function findWithAttr(array, attr, value) {
@@ -51,6 +54,33 @@
         };
 
         vm.fetch();
+
+        vm.fetchNewBooking = function(id)
+        {
+
+            var bookingSingleUrl = API_URL+'/api/booking/'+id;
+
+
+            $http({
+                url: bookingSingleUrl,
+                method: 'GET'
+            }).then(function(response){
+
+                // success callback
+                if(response.status == 200)
+                {
+                    vm.dataList.b.unshift(response.data[0]);
+                    vm.records = true;
+
+                }
+            // error callback
+            }, function(response) {
+
+                console.log('failed loading a new booking data');
+
+            });
+
+        };
 
         vm.addNew = function()
         {
@@ -234,6 +264,91 @@
             }
 
         };
+
+
+
+         vm.newBookingWatch = function()
+        {
+
+            console.log('SSE Watch activated');
+
+            if (!!window.EventSource) {
+
+
+                var EvenSourceUrl;
+
+                if(auth.getUser().role_id == "3")
+                {
+                    EvenSourceUrl = API_URL+'/channel-new-booking.php?user_id='+auth.getUser().id;
+                }
+                else {
+                    EvenSourceUrl = API_URL+'/channel-new-booking.php';
+                }
+
+
+
+            var source = new EventSource(EvenSourceUrl, {withCredentials: true});
+            } else {
+                alert("Your browser does not support Server-sent events! Please upgrade it!");
+            }
+
+            var oldValue;
+
+            source.addEventListener("message", function(e) {
+
+            
+             var data = JSON.parse(e.data);
+             var eventId = parseInt(e.lastEventId);
+
+             if(oldValue == undefined || oldValue != data['totalBookings'])
+             {
+
+                if(eventId > 0 && data['totalBookings'] > oldValue) 
+                {
+
+                    // we have a new booking as per total count
+
+                    var notify = {
+                            type: 'info',
+                            title: 'Update Alert',
+                            content: 'You Have Got a New Booking',
+                            timeout: 5000 //time in ms
+                        };
+                       $scope.$emit('notify', notify);
+                 /*
+                 grap the id and ask for api for this single record once found push this to array;
+                 */
+
+                 var newId = data.lastBookingId;
+
+
+                 vm.fetchNewBooking(newId);
+
+                }
+
+                oldValue = data['totalBookings'];
+             }
+
+        }, false);
+
+            source.addEventListener("open", function(e) {
+                console.log("Connection was opened.");
+            }, false);
+
+            source.addEventListener("error", function(e) {
+                console.log("Error - connection was lost.");
+            }, false);
+
+        };
+
+
+        
+
+
+        vm.newBookingWatch();
+
+
+
 
 
     });
