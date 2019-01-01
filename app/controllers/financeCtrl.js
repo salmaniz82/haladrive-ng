@@ -1,6 +1,6 @@
 (function() {
 
-    angular.module('haladrive').controller('financeCtrl', function(API_URL, $http){
+    angular.module('haladrive').controller('financeCtrl', function(API_URL, $http, $scope){
 
         var vm = this;
 

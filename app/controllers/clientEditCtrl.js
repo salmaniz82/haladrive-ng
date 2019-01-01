@@ -1,6 +1,6 @@
 (function() {
 
-    angular.module('haladrive').controller('clientEditCtrl', function(API_URL, $state, $stateParams, $http){
+    angular.module('haladrive').controller('clientEditCtrl', function(API_URL, $state, $stateParams, $http, $scope){
 
         var vm = this;
         var id = $stateParams.id.toString();

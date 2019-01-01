@@ -1,6 +1,6 @@
 (function() {
 
-    angular.module('haladrive').controller('gSectionCtrl', function(API_URL, $stateParams, $http){
+    angular.module('haladrive').controller('gSectionCtrl', function(API_URL, $stateParams, $http, $scope){
 
         var vm = this;
 

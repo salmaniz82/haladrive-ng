@@ -1,8 +1,8 @@
 (function() {
 
-    angular.module('haladrive').controller('clientsCtrl', function(API_URL, $http){
+    angular.module('haladrive').controller('clientsCtrl', function(API_URL, $http, $scope, $window, $state){
 
-        vm = this;
+        var vm = this;
 
         vm.fetchCleints = function()
         {
@@ -57,6 +57,9 @@
                 });
 
         };
+
+
+        
 
 
     });

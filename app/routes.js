@@ -44,7 +44,7 @@
 
         .state('app', {
             templateUrl: 'views/templates/main.html',
-            controller: 'authAppCtrl',
+            controller: 'authAppCtrl as authApp',
             abstract: true
 
         })

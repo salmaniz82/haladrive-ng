@@ -7,8 +7,8 @@
         vm.mode = 'list';
         vm.records = false;
 
-
-        console.log(auth.getUser());
+        $scope.$parent.authApp.activateNewBooking = false;
+        $scope.$parent.authApp.newBookingId = null;
 
 
         vm.findIndex = function findWithAttr(array, attr, value) {
@@ -55,30 +55,26 @@
 
         vm.fetch();
 
-        vm.fetchNewBooking = function(id)
+        vm.fetchNewBooking = function()
         {
 
-            var bookingSingleUrl = API_URL+'/api/booking/'+id;
+            console.log('Fetch Booking called from bookin Ctrl');
 
+            console.log();
 
-            $http({
-                url: bookingSingleUrl,
-                method: 'GET'
-            }).then(function(response){
+            if($scope.$parent.authApp.newBookingDetails != null)
+            {
+                    
+                console.log('Booking Ctrl attempt to update the list');
 
-                // success callback
-                if(response.status == 200)
-                {
-                    vm.dataList.b.unshift(response.data[0]);
-                    vm.records = true;
+                vm.dataList.b.unshift($scope.$parent.authApp.newBookingDetails);
 
-                }
-            // error callback
-            }, function(response) {
+                $scope.$parent.authApp.activateNewBooking = false;
+                $scope.$parent.authApp.newBookingId = null;
+                $scope.$parent.actNewBooking = false;
+                $scope.$parent.authApp.newBookingDetails = null;
 
-                console.log('failed loading a new booking data');
-
-            });
+            }
 
         };
 
@@ -117,14 +113,10 @@
 
                     // success
 
-                    console.log(response.data.status);
-
                     if(response.data.status == true)
                     {
                         vm.dataList.b.splice(i, 1);
                     }
-
-
 
                 }, function(response){
                     /* error */
@@ -138,10 +130,7 @@
                     $scope.$emit('notify', notify);
 
                 });
-
         };
-
-
 
         vm.update = function()
         {
@@ -208,8 +197,6 @@
                 });
         };
 
-
-
         vm.endBooking = function(id, statusLabel)
         {
             var url = API_URL+'/api/booking/'+id;
@@ -266,90 +253,27 @@
         };
 
 
-
-         vm.newBookingWatch = function()
-        {
-
-            console.log('SSE Watch activated');
-
-            if (!!window.EventSource) {
-
-
-                var EvenSourceUrl;
-
-                if(auth.getUser().role_id == "3")
+       $scope.$parent.$watch('actNewBooking', function (newValue, oldValue, scope) {
+               
+            if(newValue != oldValue)
+            {
+                if( $scope.$parent.actNewBooking == true)
                 {
-                    EvenSourceUrl = API_URL+'/channel-new-booking.php?user_id='+auth.getUser().id;
+
+
+                   
+                   console.log('Detected change in watch');
+
+                    vm.fetchNewBooking();  
+
                 }
-                else {
-                    EvenSourceUrl = API_URL+'/channel-new-booking.php';
-                }
-
-
-
-            var source = new EventSource(EvenSourceUrl, {withCredentials: true});
-            } else {
-                alert("Your browser does not support Server-sent events! Please upgrade it!");
+  
             }
-
-            var oldValue;
-
-            source.addEventListener("message", function(e) {
-
             
-             var data = JSON.parse(e.data);
-             var eventId = parseInt(e.lastEventId);
-
-             if(oldValue == undefined || oldValue != data['totalBookings'])
-             {
-
-                if(eventId > 0 && data['totalBookings'] > oldValue) 
-                {
-
-                    // we have a new booking as per total count
-
-                    var notify = {
-                            type: 'info',
-                            title: 'Update Alert',
-                            content: 'You Have Got a New Booking',
-                            timeout: 5000 //time in ms
-                        };
-                       $scope.$emit('notify', notify);
-                 /*
-                 grap the id and ask for api for this single record once found push this to array;
-                 */
-
-                 var newId = data.lastBookingId;
+        }, true);
 
 
-                 vm.fetchNewBooking(newId);
-
-                }
-
-                oldValue = data['totalBookings'];
-             }
-
-        }, false);
-
-            source.addEventListener("open", function(e) {
-                console.log("Connection was opened.");
-            }, false);
-
-            source.addEventListener("error", function(e) {
-                console.log("Error - connection was lost.");
-            }, false);
-
-        };
-
-
-        
-
-
-        vm.newBookingWatch();
-
-
-
-
+       console.log('wanda wanda DUS detected change Promise');
 
     });
 
