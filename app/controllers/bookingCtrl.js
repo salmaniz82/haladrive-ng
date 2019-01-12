@@ -55,20 +55,13 @@
 
         vm.fetch();
 
-        vm.fetchNewBooking = function()
+        vm.pullNewBooking = function()
         {
-
-            console.log('Fetch Booking called from bookin Ctrl');
-
-            console.log();
 
             if($scope.$parent.authApp.newBookingDetails != null)
             {
-                    
-                console.log('Booking Ctrl attempt to update the list');
-
+                
                 vm.dataList.b.unshift($scope.$parent.authApp.newBookingDetails);
-
                 $scope.$parent.authApp.activateNewBooking = false;
                 $scope.$parent.authApp.newBookingId = null;
                 $scope.$parent.actNewBooking = false;
@@ -259,13 +252,7 @@
             {
                 if( $scope.$parent.actNewBooking == true)
                 {
-
-
-                   
-                   console.log('Detected change in watch');
-
-                    vm.fetchNewBooking();  
-
+                    vm.pullNewBooking();  
                 }
   
             }
@@ -273,7 +260,7 @@
         }, true);
 
 
-       console.log('wanda wanda DUS detected change Promise');
+       console.log('Pull new booking from booking controller');
 
     });
 
